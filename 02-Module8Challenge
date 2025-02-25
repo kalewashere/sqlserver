@@ -27,31 +27,38 @@ Retrieve a list of products.
 The list should include the product name, unit price, 
 and how many units Northwind has in stock.
 */
-
+sqlq "SELECT ProductName, UnitPrice, UnitsInStock FROM Products;"
 /
+
 *2.	
 List the product name and units in stock for products where UnitsInStock equals zero.
 */
-
+sqlq "SELECT ProductName, UnitsInStock FROM Products WHERE UnitsInStock = 0;"
 /*
+
 3.	List the product name and the unit price for each product. 
 Sort the list with the smallest unit price on top.
 */
-
+sqlq "SELECT ProductName, UnitPrice FROM Products ORDER BY UnitPrice ASC;"
 
 /*
 4.	List all products with the brand "Sir Rodney's" in the product name. 
 */
 
+sqlq "SELECT ProductName FROM Products WHERE ProductName = 'Sir Rodney''s';"
 
 /*
 5.	Create a list of product names and product IDs for products 
 with supplier ID 20. Order by product name. */
 
+sqlq "SELECT ProductName, ProductID, FROM Products WHERE SupplierID = 20;"
+
 /*
 6.	List the product ID and product name for products with 
 zero units on order. Order by product ID. 
 */
+
+sqlq "SELECT ProductName, ProductID FROM Products WHERE UnitsOnOrder = 0 ORDER BY ProductID;"
 
 /*
 7. Your boss has asked you for a list of orders for
