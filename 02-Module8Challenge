@@ -67,20 +67,46 @@ sqlq "SELECT ProductName, ProductID FROM Products WHERE UnitsOnOrder = 0 ORDER B
 	   of the customer, and the name of the employee who
 	   helped place the order.
        (Hint: Use a JOIN to retrieve data from more than one table.)
+       tables needed: orders, employee, customer
+       join example:
+       sqlq "SELECT TOP 5 c.CompanyName, o.OrderDate FROM Customers AS c 
+        JOIN Orders AS o ON c.CustomerID = o.CustomerID 
+        WHERE c.CompanyName = 'QUICK-Stop';"
 */
 
+sqlq "SELECT o.OrderID, c.CompanyName, e.EmployeeID, e.LastName FROM Orders AS o
+JOIN Customers AS c ON o.CustomerID = c.CustomerID
+JOIN Employees AS e ON o.EmployeeID = e.EmployeeID
+WHERE e.LastName = 'Leverling';"
+-- OH MAN i forget how annoying joins can be!! really glad to see I can still figure it out!! I miss SQL so much
 /*
 8. Insert a new record into the products table with a product name
     that is your favorite food, a unit price that is $4.55, supplier ID 26, and category ID 5.
 */
  
-
+sqlq "INSERT INTO Products(ProductName, UnitPrice, SupplierID, CategoryID)
+VALUES('Matcha Mochi', '4.99', 26, 5);"
 
 /*
 9. Display the new record you added to the products table 
 where the product name is your favorite food.
-*/
 
+made a huge mistake checking my work and updated category 5 products. went to github fork origin, dug through the files and found the original names. ran script as follows:
+sqlq “UPDATE Products SET ProductName = ‘Gustaf''s KnÃ¤ckebrÃ¶d’ WHERE ProductID = 22;”
+
+sqlq “UPDATE Products SET ProductName = ‘TunnbrÃ¶d’ WHERE ProductID = 23;”
+
+sqlq “UPDATE Products SET ProductName = ‘Singaporean Hokkien Fried Mee’ WHERE ProductID = 42;”
+
+sqlq “UPDATE Products SET ProductName = ‘Filo Mix’ WHERE ProductID = 52;” 
+
+sqlq “UPDATE Products SET ProductName = ‘Gnocchi di nonna Alice’ WHERE ProductID = 56;”
+
+sqlq “UPDATE Products SET ProductName = ‘Ravioli Angelo’ WHERE ProductID = 57;”
+
+sqlq “UPDATE Products SET ProductName = ‘Wimmers gute SemmelknÃ¶del’ WHERE ProductID = 64;”
+*/
+sqlq "SELECT * FROM Products WHERE ProductName = 'Matcha Mochi';"
 /*
 10. Insert a record into the suppliers table.
     The record should contain the following values:
@@ -91,17 +117,21 @@ where the product name is your favorite food.
 	- 123 Sesame Street as the address
     - Saint Paul as the city
 */
- 
+sqlq "INSERT INTO Suppliers (SupplierID, CompanyName, ContactName, ContactTitle, Address, City)
+VALUES (30, 'Minneapolis College', 'Taylor McLughlin', 'Manager', '123 Sesame Street', 'Saint Paul');" 
 /*
+the insert command above returned error: 
+"Msg 544, Level 16, State 1, Server cbeefd686b95, Line 1 
+Cannot insert explicit value for identity column in table 'Suppliers' wehn IDENTITY_INSERT is set to OFF."
 11. Display the new record that you created in the suppliers
     table to ensure it was inserted correctly.
 */
-
+sqlq "SELECT * FROM Suppliers WHERE SupplierID = 30;"
 /*
 12. Update the record in the products table for your favorite food.
 Change the unit price from $4.55 to $9.99.
 */
-
+sqlq "UPDATE Products SET UnitPrice = '9.99' WHERE ProductName = 'Matcha Mochi';"
 /*
 13. Insert a new record into the Categories table. 
 Insert the values 'Ice Cream'and 'Frosty desserts' into the 
@@ -110,12 +140,13 @@ a value into the CategoryID column because that it auto-populated.
 You don't need to insert a value into the Picture column 
 because it is optional.
 */
-
+sqlq "INSERT INTO Categories(CategoryName, Description)
+VALUES ('Ice Cream', 'Frosty Desserts');"
 /*
 14. Delete the record you just inserted into the Categories table.
 */
  
-
+sqlq "DELETE FROM Categories WHERE CategoryID = 9;"
 
 
 
